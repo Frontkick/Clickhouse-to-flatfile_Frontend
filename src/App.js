@@ -29,7 +29,7 @@ const App = () => {
   const [progress, setProgress] = React.useState(0);
   const [recordCount, setRecordCount] = React.useState(null);
   const [errorMessage, setErrorMessage] = React.useState('');
-  
+
   const BASE_URL = 'https://test-pg5s.onrender.com';
 
   // Calculate progress based on direction and completed steps
@@ -115,7 +115,7 @@ const App = () => {
         }, {
           responseType: 'blob',
         });
-        
+
         const url = window.URL.createObjectURL(new Blob([response.data]));
         const link = document.createElement('a');
         link.href = url;
@@ -148,20 +148,20 @@ const App = () => {
   };
 
   const sourceColumns = direction === 'clickhouse_to_flatfile'
-  ? (selectedTables.length === 1
-    ? schemas[selectedTables[0]]?.map(col => col.name) || []
-    : selectedTables.flatMap(table =>
+    ? (selectedTables.length === 1
+      ? schemas[selectedTables[0]]?.map(col => col.name) || []
+      : selectedTables.flatMap(table =>
         schemas[table]?.map(col =>
           col.name.startsWith(`${table}.`) ? col.name : `${table}.${col.name}`
         ) || []
       ))
-  : flatFile?.columns || [];
+    : flatFile?.columns || [];
 
 
   return (
     <div className="pt-10">
       <ProgressBar progress={progress} />
-      <h1 className="text-3xl font-bold mb-6 text-center" style={{paddingTop:'40px'}}>Data Ingestion Application</h1>
+      <h1 className="text-3xl font-bold mb-6 text-center" style={{ paddingTop: '40px' }}>Data Ingestion Application</h1>
       <DirectionSelector direction={direction} setDirection={setDirection} />
       {direction === 'clickhouse_to_flatfile' ? (
         <div>
@@ -183,13 +183,14 @@ const App = () => {
               setJoinKeys={setJoinKeys}
             />
           )}
-          {selectedTables.length > 0 && (
+          {selectedTables.length > 0 && selectedTables.length < 2 && (
             <ColumnSelector
               columns={sourceColumns}
               selectedColumns={selectedColumns}
               setSelectedColumns={setSelectedColumns}
             />
           )}
+
           <label className="block mb-4">
             Output File Name:
             <input
