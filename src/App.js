@@ -148,10 +148,15 @@ const App = () => {
   };
 
   const sourceColumns = direction === 'clickhouse_to_flatfile'
-    ? (selectedTables.length === 1
-      ? schemas[selectedTables[0]]?.map(col => col.name) || []
-      : selectedTables.flatMap(table => schemas[table]?.map(col => `${table}.${col.name}`) || []))
-    : flatFile?.columns || [];
+  ? (selectedTables.length === 1
+    ? schemas[selectedTables[0]]?.map(col => col.name) || []
+    : selectedTables.flatMap(table =>
+        schemas[table]?.map(col =>
+          col.name.startsWith(`${table}.`) ? col.name : `${table}.${col.name}`
+        ) || []
+      ))
+  : flatFile?.columns || [];
+
 
   return (
     <div className="pt-10">
