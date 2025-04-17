@@ -70,12 +70,13 @@ const ClickHouseConfig = ({ setConnection, setTables }) => {
         <input
           type="checkbox"
           id="secure"
-          checked={secure}
-          onChange={(e) => setSecure(e.target.checked)}
+          checked={true}
+          disabled
           className="form-check-input"
         />
         <label htmlFor="secure" className="form-check-label">Secure Connection</label>
       </div>
+
       <button
         onClick={handleConnect}
         className="btn btn-primary w-100"
