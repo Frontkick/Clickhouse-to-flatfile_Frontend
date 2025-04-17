@@ -12,15 +12,15 @@ const ClickHouseConfig = ({ setConnection, setTables }) => {
 
   const handleConnect = async () => {
     setLoading(true); // Set loading state to true when the connection starts
-
+  
     try {
       const response = await axios.post('https://test-pg5s.onrender.com/list_tables', {
         host,
         user,
         password,
-        secure,
+        secure: true, // Always use true
       });
-      setConnection({ host, user, password, secure });
+      setConnection({ host, user, password, secure: true });
       setTables(response.data.tables);
       setError('');
     } catch (err) {
@@ -29,6 +29,7 @@ const ClickHouseConfig = ({ setConnection, setTables }) => {
       setLoading(false); // Set loading state to false once the request completes
     }
   };
+  
 
   return (
     <div className="card p-4 mb-4 shadow-sm">
@@ -70,13 +71,12 @@ const ClickHouseConfig = ({ setConnection, setTables }) => {
         <input
           type="checkbox"
           id="secure"
-          checked={true}
-          disabled
+          checked={secure}
+          onChange={(e) => setSecure(e.target.checked)}
           className="form-check-input"
         />
         <label htmlFor="secure" className="form-check-label">Secure Connection</label>
       </div>
-
       <button
         onClick={handleConnect}
         className="btn btn-primary w-100"
