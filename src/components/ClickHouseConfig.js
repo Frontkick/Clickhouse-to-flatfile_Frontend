@@ -35,7 +35,7 @@ const ClickHouseConfig = ({ setConnection, setTables }) => {
     <div className="card p-4 mb-4 shadow-sm">
       <h2 className="card-title mb-3">ClickHouse Connection</h2>
       <div className="mb-3">
-        <label htmlFor="host" className="form-label">Host</label>
+        <label htmlFor="host" className="form-label">Host (Test: f6ef17vtbt.us-west-2.aws.clickhouse.cloud)</label>
         <input
           type="text"
           id="host"
@@ -46,7 +46,7 @@ const ClickHouseConfig = ({ setConnection, setTables }) => {
         />
       </div>
       <div className="mb-3">
-        <label htmlFor="user" className="form-label">User</label>
+        <label htmlFor="user" className="form-label">User (test: default)</label>
         <input
           type="text"
           id="user"
@@ -57,7 +57,7 @@ const ClickHouseConfig = ({ setConnection, setTables }) => {
         />
       </div>
       <div className="mb-3">
-        <label htmlFor="password" className="form-label">Password</label>
+        <label htmlFor="password" className="form-label">Password (test: 4iTt.ZBfyggb9)</label>
         <input
           type="password"
           id="password"
